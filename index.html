@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>닌자 번개 게임 (모바일)</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: none;
+      margin: 0 auto;
+      background: #000;
+    }
+    video {
+      display: block;
+      margin: 0 auto;
+    }
+    #controls {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 10;
+    }
+    .control-btn {
+      padding: 15px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: #444;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <video id="introVideo" width="480" height="640" autoplay playsinline>
+    <source src="video/ninjagameintro.mp4" type="video/mp4">
+    브라우저가 비디오를 지원하지 않습니다.
+  </video>
+
+  <canvas id="gameCanvas" width="480" height="640"></canvas>
+
+  <div id="controls">
+    <button class="control-btn" id="leftBtn">◀️</button>
+    <button class="control-btn" id="fireBtn">⚡</button>
+    <button class="control-btn" id="rightBtn">▶️</button>
+  </div>
+
+  <audio id="bgm" src="audio/bgm.mp3" loop></audio>
+
+  <script>
+    const video = document.getElementById('introVideo');
+    const canvas = document.getElementById('gameCanvas');
+
+    video.onended = () => {
+      video.style.display = "none";
+      canvas.style.display = "block";
+    };
+
+    // 음악 재생을 스페이스로 따로 실행
+    document.body.addEventListener('keydown', (e) => {
+      if (e.key === ' ') document.getElementById('bgm').play();
+    });
+  </script>
+
+  <script src="js/game_mobile.js"></script>
+</body>
+</html>
